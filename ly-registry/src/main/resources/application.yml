@@ -1,0 +1,11 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: ly-registry     #自己在注册中心注册的服务名
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka  #注册中心地址
+    fetch-registry: false   #是否从注册中心中拉去服务
+    register-with-eureka: false   #是否自己注册到注册中心

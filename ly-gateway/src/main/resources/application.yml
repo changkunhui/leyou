@@ -1,0 +1,63 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: ly-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 5    #默认30s去注册中心拉去服务注册信息,改为5s
+zuul:
+  prefix: /api #安全考虑,前缀
+  routes:
+    item-service: /item/** # 将商品微服务映射到/item/**,只要符合/item/**规则的都分发到item-service微服务中
+    upload-service: /upload/** # 将图片上传微服务映射到/upload/**
+    search-service: /search/** #搜索微服务
+    user-service: /user/** #用户中心微服务
+    auth-service: /auth/** #授权中心微服务
+  sensitive-headers:  #覆盖敏感头信息
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 # 熔断超时时长：6000ms
+ribbon:
+  ConnectTimeout: 500 # ribbon链接超时时长
+  ReadTimeout: 2000 # ribbon读取超时时长
+  MaxAutoRetries: 0  # 当前服务重试次数
+  MaxAutoRetriesNextServer: 1 # 切换服务重试次数
+  OkToRetryOnAllOperations: false # 是否对所有的请求方式都重试，只对get请求重试
+
+ly:
+  cors:
+    allowedOrigins:
+      - http://manage.leyou.com
+      - http://www.leyou.com
+    allowedCredentials: true
+    allowedHeaders:
+      - "*"
+    allowedMethods:
+      - GET
+      - POST
+      - DELETE
+      - PUT
+      - OPTIONS
+      - HEAD
+    maxAge: 3600
+    filterPath: "/**"
+  jwt:
+    pubKeyPath: /Users/changkunhui/Workspaces/leyouWork/id_rsa.pub # 公钥地址 # 公钥地址
+    user:
+      cookieName: LY_TOKEN # cookie名称
+  filter:
+    allowPaths:
+      - /api/auth/login
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item

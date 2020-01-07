@@ -1,0 +1,40 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: user-service
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql:///leyou-116?characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: root
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+#myBatis-plus
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #输出sql日志
+#Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 10
+#rocketMq
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: ${spring.application.name} #表示分组名是该微服务的名字
+#日志级别
+logging:
+  level:
+    com.leyou: debug
+#spring加密配置
+ly:
+  encoder:
+    crypt:
+      secret: ${random.uuid} # 随机的密钥，使用uuid
+      strength: 10 # 加密强度4~31，决定了密码和盐加密时的运算次数，超过10以后加密耗时会显著增加
+

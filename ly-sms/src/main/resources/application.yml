@@ -1,0 +1,22 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: sms-service
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: ${spring.application.name} #表示分组名是该微服务的名字
+ly:
+  sms:
+    accessKeyId: LTAI4FuqYec2YqEoRhmmsE3E
+    accessKeySecret: 3m3BaQFDopmpJMLq2Ixvt57Qg9Jomo
+    signName: 乐优商城 # 签名名称
+    verifyCodeTemplate: SMS_181857033 # 模板名称
+    domain: dysmsapi.aliyuncs.com # 域名
+    action: SendSMS # API类型，发送短信
+    version: 2017-05-25 # API版本，固定值
+    regionID: cn-hangzhou # 区域id
+logging:
+  level:
+    com.leyou: debug
