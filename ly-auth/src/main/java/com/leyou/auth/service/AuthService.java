@@ -74,7 +74,8 @@ public class AuthService {
         String token = JwtUtils.generateTokenExpireInMinutes(userInfo, prop.getPrivateKey(), prop.getUser().getExpire());
 
         //写入Cookie
-        CookieUtils.newCookieBuilder().value(token)
+        CookieUtils.newCookieBuilder()
+                .value(token)
                 .response(response)     //response,用户写入cookie
                 .httpOnly(true)         //不允许JS操作cookie,防止XSS攻击
                 .domain(prop.getUser().getCookieDomain())       //设置domain

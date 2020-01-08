@@ -116,6 +116,9 @@ public class AuthFilter extends ZuulFilter {
 
             // TODO 判断权限，此处暂时空置，等待权限服务完成后补充
             log.info("【网关】用户{},角色{}。访问服务{} : {}，", userInfo.getUsername(), role, method, path);
+
+            //将userId设置到请求头中,带给后面的微服务
+            ctx.addZuulRequestHeader("USER_ID",userInfo.getId().toString());
         } catch (Exception e) {
             //解析抛出异常,说明用户为未登录
             ctx.setResponseStatusCode(403);

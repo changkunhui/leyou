@@ -26,4 +26,6 @@ public interface GoodsService {
     void updateGoods(SpuDTO spuDTO);
 
     SpuDTO findSpuBySpuId(Long id);
+
+    List<SkuDTO> findSkuListByIds(List<Long> ids);
 }

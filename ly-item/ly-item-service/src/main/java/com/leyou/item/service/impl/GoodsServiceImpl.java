@@ -263,6 +263,25 @@ public class GoodsServiceImpl implements GoodsService {
         return BeanHelper.copyProperties(tbSpu,SpuDTO.class);
     }
 
+    /**
+     * 根据skuId的集合查询sku集合
+     * @param ids
+     * @return
+     */
+    @Override
+    public List<SkuDTO> findSkuListByIds(List<Long> ids) {
+        Collection<TbSku> skuCollection = skuService.listByIds(ids);
+
+        if(CollectionUtils.isEmpty(skuCollection)){
+            throw new LyException(ExceptionEnum.GOODS_NOT_FOUND);
+        }
+
+        return skuCollection.stream().map(tbSku->{
+            return BeanHelper.copyProperties(tbSku,SkuDTO.class);
+        }).collect(Collectors.toList());
+
+    }
+
 
     /**
      * 处理品牌名称和分类名称
