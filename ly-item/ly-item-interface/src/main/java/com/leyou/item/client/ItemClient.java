@@ -3,13 +3,11 @@ package com.leyou.item.client;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * item微服务提供的远程调用的feign接口
@@ -58,4 +56,13 @@ public interface ItemClient {
 
     @GetMapping(value = "/spec/of/category",name = "根据categoryId查询规格参数组和组内参数")
     List<SpecGroupDTO> findSpecGroupWithParamListByCategoryId(@RequestParam("id") Long id);
+
+    @GetMapping(value = "/sku/list",name = "根据skuIds查询sku集合信息")
+    List<SkuDTO> findSkuListByIds(@RequestParam("ids") List<Long> ids);
+
+    @PutMapping(value = "/stock/minus",name = "减库存")
+    void stockMinus(@RequestBody Map<Long,Integer> skuIdAndNumMap);
+
+    @PutMapping(value = "/stock/plus",name = "恢复库存")
+    Void stockPlus(@RequestBody Map<Long,Integer> skuIdAndNumMap);
 }

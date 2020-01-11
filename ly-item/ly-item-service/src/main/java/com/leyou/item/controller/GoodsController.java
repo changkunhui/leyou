@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -84,5 +85,19 @@ public class GoodsController {
         List<SkuDTO> skuDTOList = goodsService.findSkuListByIds(ids);
         return ResponseEntity.ok(skuDTOList);
     }
+
+    @PutMapping(value = "/stock/minus",name = "减库存")
+    public ResponseEntity<Void> stockMinus(@RequestBody Map<Long,Integer> skuIdAndNumMap){
+        goodsService.stockMinus(skuIdAndNumMap);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value = "/stock/plus",name = "恢复库存")
+    public ResponseEntity<Void> stockPlus(@RequestBody Map<Long,Integer> skuIdAndNumMap){
+        goodsService.stockPlus(skuIdAndNumMap);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }

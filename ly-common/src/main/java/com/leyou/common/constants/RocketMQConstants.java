@@ -44,7 +44,7 @@ public abstract class RocketMQConstants {
          */
         public static final String SECKILL_ORDER_TAGS = "seckill.order";
         /**
-         * 秒杀业务创建订单TAGS
+         * 清理订单TAGS
          */
         public static final String ORDER_OVERTIME_TAGS = "order.overtime";
     }
@@ -62,7 +62,7 @@ public abstract class RocketMQConstants {
          */
         public static final String SECKILL_BEGIN_CONSUMER = "SECKILL_BEGIN_CONSUMER";
         /**
-         * 秒杀 订单创建
+         * 清理订单
          */
         public static final String ORDER_OVERTIME_CONSUMER = "ORDER_OVERTIME_CONSUMER";
         /**

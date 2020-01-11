@@ -17,4 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class TbSkuServiceImpl extends ServiceImpl<TbSkuMapper, TbSku> implements TbSkuService {
 
+    /**
+     * 减库存
+     * @param skuId
+     * @param num   减少的数量
+     */
+    @Override
+    public void stockMinus(Long skuId, Integer num) {
+        this.getBaseMapper().stockMinus(skuId,num);
+    }
+
+    @Override
+    public void stockPlus(Long skuId, Integer num) {
+        this.getBaseMapper().stockPlus(skuId,num);
+    }
 }

@@ -6,6 +6,7 @@ import com.leyou.item.dto.SpuDTO;
 import com.leyou.item.dto.SpuDetailDTO;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,4 +29,8 @@ public interface GoodsService {
     SpuDTO findSpuBySpuId(Long id);
 
     List<SkuDTO> findSkuListByIds(List<Long> ids);
+
+    void stockMinus(Map<Long,Integer> skuIdAndNumMap);
+
+    void stockPlus(Map<Long,Integer> skuIdAndNumMap);
 }

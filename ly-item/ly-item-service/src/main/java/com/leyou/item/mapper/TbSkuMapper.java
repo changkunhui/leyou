@@ -2,6 +2,8 @@ package com.leyou.item.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.leyou.item.entity.TbSku;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -13,4 +15,9 @@ import com.leyou.item.entity.TbSku;
  */
 public interface TbSkuMapper extends BaseMapper<TbSku> {
 
+    @Update("update tb_sku set stock = stock - #{num} where id = #{id}")
+    void stockMinus(@Param("id") Long skuId, @Param("num") Integer num);
+
+    @Update("update tb_sku set stock = stock + #{num} where id = #{id}")
+    void stockPlus(@Param("id") Long skuId, @Param("num") Integer num);
 }

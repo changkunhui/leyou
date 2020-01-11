@@ -23,6 +23,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.leyou.common.constants.RocketMQConstants.TAGS.ITEM_DOWN_TAGS;
@@ -280,6 +281,30 @@ public class GoodsServiceImpl implements GoodsService {
             return BeanHelper.copyProperties(tbSku,SkuDTO.class);
         }).collect(Collectors.toList());
 
+    }
+
+    /**
+     * 根据skuId,num减库存
+     * @param skuIdAndNumMap
+     */
+    @Override
+    public void stockMinus(Map<Long, Integer> skuIdAndNumMap) {
+        for (Long skuId : skuIdAndNumMap.keySet()) {
+            Integer num = skuIdAndNumMap.get(skuId);
+            skuService.stockMinus(skuId,num);
+        }
+    }
+
+    /**
+     * 根据skuId,num减库存
+     * @param skuIdAndNumMap
+     */
+    @Override
+    public void stockPlus(Map<Long, Integer> skuIdAndNumMap) {
+        for (Long skuId : skuIdAndNumMap.keySet()) {
+            Integer num = skuIdAndNumMap.get(skuId);
+            skuService.stockPlus(skuId,num);
+        }
     }
 
 

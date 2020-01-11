@@ -17,6 +17,10 @@ zuul:
     user-service: /user/** #用户中心微服务
     auth-service: /auth/** #授权中心微服务
     cart-service: /cart/** #购物车微服务
+    order-service:
+      path: /order/**
+      serviceId: order-service
+      strip-prefix: false
   sensitive-headers:  #覆盖敏感头信息
 
 hystrix:
